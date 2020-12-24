@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Demo api</title>
+        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"> -->
+        <link rel="stylesheet" href="/material.css">
+        <link rel="stylesheet" href="/roto.css">
+        <link rel="stylesheet" href="/font-awesome.min.css">
+        <link rel="stylesheet" href="/bootstrap.min.css">
+         <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
+         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+         <script src="/jquery.min.js"></script>
+         <script src="/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> -->
+        <link rel="stylesheet" href="/style.css">
+        <script type="text/javascript" src="/main.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12" >
+                    <div class="well well-lg">
+                        <h3>Welcome <span class="username"><%=user%></span> <a href="/logout" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                        </a>|<a href="/password" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-log-out"></span> Change password
+                        </a></h3> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+               
+                <div class="col-sm-12 right">
+                    <div class="table-wrapper table-responsive">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h2>Manage <b>Api </b></h2>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="" class="btn btn-success" id="Add" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Api</span></a>
+                                    <a href="#deleteEmployeeModal" class="btn btn-danger" id="DeleteAll" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-hover " id="tbfilter" >
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span class="custom-checkbox">
+                                        <input type="checkbox" id="selectAll">
+                                        <label for="selectAll"></label>
+                                        </span>
+                                    </th>
+                                     <th>Api_key</th>
+                                    <th>Name</th>
+                                    <th>Use</th>
+                                    <th>Limit/Month</th>
+                                    <th>Limit MB</th>
+                                    <!-- <th>Note</th> -->
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                             <% for(i in dtall) { %>
+                                
+                                <tr id="<%= dtall[i].apikey %>">
+                                    <td>
+                                        <span class="custom-checkbox">
+                                        <input type="checkbox"  name="options[]" value="<%= dtall[i].apikey %>">
+                                        <label for="checkbox1"></label>
+                                        </span>
+                                    </td>
+                                    <td class="apikey"><a href="#"><%= dtall[i].apikey %></a></td>
+                                    <td class="name"><input name="name" type="text" value="<%= dtall[i].name %>" readonly></td>
+                                    <td class="use"><%= dtall[i].usem[year][month] %>|<%= dtall[i].use %></td>
+                                    <td class="limit"><input type="number" min="0" max="10000" value="<%= dtall[i].limitm %>" readonly></td>
+                                    <td class="mb"><input type="number" min="0" max="10000" value="<%= dtall[i].limitu %>" readonly></td>
+                                    <!-- <td><textarea id="w3review" name="w3review">
+                                        At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+                                        </textarea></td> -->
+                                    <td>
+                                        <a href="javascript:function() { return false; }" class="editt"  data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe3c9</i></a>
+                                        <a href="#deleteEmployeeModal"  class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    </td>
+                                </tr>
+                                <tr> <td></td><th colspan="7 "> <span class="cnote">Note: </span> <input class="note" type="text" value="<%= dtall[i].note %>" readonly ></th> </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                </div>
+                <div class="hidden" id="ab" data-id="fdfdf"></div>
+                <div class="modal fade" id="addfilter" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"><span class="madd">Add</span> Filter</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                            </div>
+                            <div class="modal-body">
+                            <input type="text" class="d-none vlid" value="abc"> 
+                                <div>
+                                    <label>Name</label>
+                                    <input name="namef" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                <input type="button" id="addFilterr" class="btn btn-success" value="Add">
+                            </div>
+                    </div>
+                </div>
+            </div>
+                <!-- Delete Modal HTML -->
+                <div id="deleteEmployeeModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Api</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to delete these Records?</p>
+                                    <p class="text-warning"><small>This action cannot be undone.</small></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                    <input type="button" class="btn btn-danger remove" value="Delete">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+</html>
