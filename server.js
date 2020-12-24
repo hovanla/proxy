@@ -80,12 +80,11 @@ app.get('/', function (req, res) {
   let api_key=req.query.api_key;
   const url=req.query.url;
   let keep_headers=req.query.keep_headers;
-  let headers="";
+  let header="";
   let limitu=2097152;
   if(keep_headers){
-    header=sreq.headers;
+    header=req.headers;
   }
-  // console.log(api_key)
   // let testapi=db.get('posts')
   // .find({ "apikey": api_key })
   // .value()
@@ -143,7 +142,7 @@ app.get('/', function (req, res) {
           method: 'GET',
           uri: url,
           timeout:20000,
-          headers:headers
+          headers:header
        };
 // const URL = 'http://old-releases.ubuntu.com/releases/16.04.3/ubuntu-16.04-desktop-amd64.iso';
 let total_bytes_read = 0;
@@ -209,11 +208,11 @@ app.post('/', function (req, res) {
   let api_key=req.query.api_key;
   const url=req.query.url;
   let keep_headers=req.query.keep_headers;
-  let form=req.body;
-  let headers="";
+  let formm=req.body;
+  let header="";
   let limitu=2097152;
   if(keep_headers){
-    header=sreq.headers;
+    header=req.headers;
   }
   // console.log(api_key)
   // let testapi=db.get('posts')
@@ -270,15 +269,14 @@ app.post('/', function (req, res) {
     let amount={[month]:usem+1};
     if(usem<limitm){
         var opts = {
-          method: 'GET',
+          method: 'POST',
           uri: url,
           timeout:20000,
-          headers:headers,
-          form:form
+          headers:header,
+          form:formm
        };
 // const URL = 'http://old-releases.ubuntu.com/releases/16.04.3/ubuntu-16.04-desktop-amd64.iso';
 let total_bytes_read = 0;
-// console.log(opts)
   let data='';
   try {
     var test=request
@@ -511,4 +509,4 @@ var server = app.listen(PORT, function () {
     var port = server.address().port
     console.log("Ung dung Node.js dang hoat dong tai dia chi: http://%s:%s", host, port)
   });
-
+  server.keepAliveTimeout=60000;
