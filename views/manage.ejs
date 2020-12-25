@@ -57,9 +57,9 @@
                                     </th>
                                      <th>Api_key</th>
                                     <th>Name</th>
-                                    <th>Use</th>
-                                    <th>Limit/Month</th>
-                                    <th>Limit MB</th>
+                                    <th>Used this month</th>
+                                    <th>Transactionlimits/Month</th>
+                                    <th>Limits MB/transaction</th>
                                     <!-- <th>Note</th> -->
                                     <th>Actions</th>
                                 </tr>
@@ -76,9 +76,9 @@
                                     </td>
                                     <td class="apikey"><a href="#"><%= dtall[i].apikey %></a></td>
                                     <td class="name"><input name="name" type="text" value="<%= dtall[i].name %>" readonly></td>
-                                    <td class="use"><%= dtall[i].usem[year][month] %>|<%= dtall[i].use %></td>
-                                    <td class="limit"><input type="number" min="0" max="10000" value="<%= dtall[i].limitm %>" readonly></td>
-                                    <td class="mb"><input type="number" min="0" max="10000" value="<%= dtall[i].limitu %>" readonly></td>
+                                    <td class="use"><%= dtall[i].usem[year][month] %>%></td>
+                                    <td class="limit"><input type="number"  value="<%= dtall[i].limitm %>" readonly></td>
+                                    <td class="mb"><input type="number"  value="<%= dtall[i].limitu %>" readonly></td>
                                     <!-- <td><textarea id="w3review" name="w3review">
                                         At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
                                         </textarea></td> -->
