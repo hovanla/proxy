@@ -76,7 +76,9 @@
                                     </td>
                                     <td class="apikey"><a href="#"><%= dtall[i].apikey %></a></td>
                                     <td class="name"><input name="name" type="text" value="<%= dtall[i].name %>" readonly></td>
-                                    <td class="use"><%= dtall[i].usem[year][month] %>%></td>
+                                    <% if( typeof dtall[i].usem[year] !='undefined') {%>
+                                        <td class="use"> <%= dtall[i].usem[year][month] %></td> <%}else{%>
+                                            <td class="use"> 0 </td> <%}%>
                                     <td class="limit"><input type="number"  value="<%= dtall[i].limitm %>" readonly></td>
                                     <td class="mb"><input type="number"  value="<%= dtall[i].limitu %>" readonly></td>
                                     <!-- <td><textarea id="w3review" name="w3review">
