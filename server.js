@@ -337,17 +337,17 @@ app.get('/account', function(req, res) {
   let timen = Date.now();
   let api_key=req.query.api_key;
   let testapi=getvl(api_key);
-  if(typeof testapi.test!="undefined" && timen-testapi.test<3000){
-    testapi.tt=testapi.tt+1;
-  }else{
-    testapi.test=timen;
-    testapi.tt=0;
-  }
-  let rfasle=parseInt(testapi.rfalse);
-  let rcount=parseInt(testapi.use);
-  let rlimit=parseInt(testapi.limitm);
-  let rc=(typeof testapi.tt!="undefined")?parseInt(testapi.tt):0
   if(testapi){
+    if(typeof testapi.test!="undefined" && timen-testapi.test<3000){
+      testapi.tt=testapi.tt+1;
+    }else{
+      testapi.test=timen;
+      testapi.tt=0;
+    }
+    let rfasle=parseInt(testapi.rfalse);
+    let rcount=parseInt(testapi.use);
+    let rlimit=parseInt(testapi.limitm);
+    let rc=(typeof testapi.tt!="undefined")?parseInt(testapi.tt):0
     return res.json({"concurrencyLimit":5,"concurrentRequests":rc,"failedRequestCount":rfasle,"requestCount":rcount,"requestLimit":rlimit})
   }else{
     return res.status(403).json({error: "Unauthorized request. Please check your credentials and try again."
