@@ -74,7 +74,10 @@ function checkToken (req, res, next) {
     
     // setInterval(intervalFunc, 1500);
 var sumrq=0;
-
+const findAPIKEY = async (key) => {
+  let api = await db.get('posts').find({"apikey":key}).value();
+  return api;
+};
 app.get('/', function (req, res) {
   let timen = Date.now();
   let api_key=req.query.api_key;
@@ -462,9 +465,23 @@ app.post('/login',async function(req, res) {
   app.all('*', checkToken);
 app.post('/api/insert',function(req,res){
   let dt=req.body;
-  db.get('posts').push(dt)
-.write();
-res.json({"status":"success"})
+  if(dt.apikey){
+    findAPIKEY(dt.apikey).then((rs)=>{
+      if(!rs){
+        db.get('posts').push(dt).write();
+        res.json({"status":"success"})
+      }else{
+        res.json({"error":"Api_key exist!"})
+      }
+      
+    }).catch(e => {
+      console.log(e)
+      res.json({"error":e})
+    });
+  }else{
+    res.json({"error":"ERROR!"})
+  }
+ 
 });
 app.put('/api/update/:id',function(req,res){
   let id=req.params.id;

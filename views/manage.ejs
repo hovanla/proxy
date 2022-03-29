@@ -74,7 +74,7 @@
                                         <label for="checkbox1"></label>
                                         </span>
                                     </td>
-                                    <td class="apikey"><a href="#"><%= dtall[i].apikey %></a></td>
+                                    <td class="apikey"><input name="apikey" type="text" value="<%= dtall[i].apikey %>" readonly></td>
                                     <td class="name"><input name="name" type="text" value="<%= dtall[i].name %>" readonly></td>
                                     <% if( typeof dtall[i].usem[year] !='undefined') {%>
                                         <td class="use"> <%= dtall[i].usem[year][month] %></td> <%}else{%>

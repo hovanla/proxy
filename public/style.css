@@ -207,7 +207,10 @@ table.table td a {
     border: none;
     width: 15em;
 }
-
+.apikey input{
+    border: none;
+    width: 23em;
+}
 table.table td a:hover {
     color: #2196F3;
 }
